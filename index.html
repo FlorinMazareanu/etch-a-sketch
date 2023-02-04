@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Etch a sketch</title>
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
-	<script src="scripts/script1.js"></script>
-    <section id="title-section">
-        <h1>Etch-a-sketch</h1>
-    </section>
-    <section id="menu-section">
-
-    </section>
-    <section id="sketch-section">
-        
-    </section>
+	<script src="scripts/script1.js" defer></script>
+    <div id="menu-and-sketch">
+        <div id="menu-container">
+          <div id="selected-color">
+          </div>
+          <button class="menu-button">Color mode</button>
+          <button class="menu-button">Rainbow mode</button>
+          <button class="menu-button">Eraser</button>
+          <button class="menu-button">Clear</button>
+          <p>0 x 0</p>
+          <input type="range" value="15" min="1" max="64">
+        </div>
+        <div id="h1-and-sketch-container">
+          <h1>Etch a sketch</h1>
+          <div id="sketch-container">
+          </div>
+        </div>
+    </div>
   </body>
 </html>
