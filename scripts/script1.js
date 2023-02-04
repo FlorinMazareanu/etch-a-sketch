@@ -3,6 +3,7 @@ let colorElement = document.getElementById("selected-color");
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
 
+
 //color setup function for setting the current color colorNow:
 //changeColor changes colorNow, the current color that's selected
 function changeColor() {
@@ -12,12 +13,40 @@ function changeColor() {
     console.log(colorNow);
 }
 
+//event listener for mouse down:
+//this is needed for changeSquareColor to 
+//not have colors changing when hovering
+//without keeping the mouse clicked while doing so
+let mouseState;
+function mouseDownToggle(e) {
+    mouseState = e.type;
+    console.log(mouseState);
+}
+function mouseUpToggle(e) {
+    mouseState = e.type;
+    console.log(mouseState);
+}
+window.addEventListener("mousedown", mouseDownToggle);
+window.addEventListener("mouseup", mouseUpToggle);
+
 //on click function to change square color:
-function changeSquareColor() {
+function changeSquareColor(e) {
     console.log("se executa changeSquareColor");
     console.log("color now: " + colorNow);
     console.log(this);
-    this.style["background-color"] = colorNow;
+    //console.log("mouse este acum: ") + mouseDown;
+    //console.log(e.type);
+    //e.type = "mouseover";
+    //console.log(e.type);
+    if (e.type === "mousemove" && mouseState === "mousedown") {
+        this.style["background-color"] = colorNow;
+        console.log("mousemove");
+    }
+    if (e.type === "mousedown") {
+        console.log("mousedown");
+        this.style["background-color"] = colorNow;
+    }
+    //this.style["background-color"] = colorNow;
 }
 
 //sketch setup to set size:
@@ -45,7 +74,8 @@ for (let i = 1; i <= sketchSize; i++) {
         sketchSquare.className = "sketch-square";
         sketchContainer.appendChild(sketchSquare);
         //console.log(sketchSquare);
-        sketchSquare.addEventListener("click", changeSquareColor)
+        sketchSquare.addEventListener("mousedown", changeSquareColor);
+        sketchSquare.addEventListener("mousemove", changeSquareColor);
     }
 }
 
