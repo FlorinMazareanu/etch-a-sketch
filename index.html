@@ -11,14 +11,15 @@
 	<script src="scripts/script1.js" defer></script>
     <div id="menu-and-sketch">
         <div id="menu-container">
-          <div id="selected-color">
+          <div class="menu-element" id="selected-color-container">
+            <div id="selected-color"></div>
           </div>
-          <button class="menu-button">Color mode</button>
-          <button class="menu-button">Rainbow mode</button>
-          <button class="menu-button">Eraser</button>
-          <button class="menu-button">Clear</button>
-          <p>0 x 0</p>
-          <input type="range" value="15" min="1" max="64">
+          <button class="menu-element menu-button">Color mode</button>
+          <button class="menu-element menu-button">Rainbow mode</button>
+          <button class="menu-element menu-button">Eraser</button>
+          <button class="menu-element menu-button">Clear</button>
+          <p class="menu-element" id="number-x-number">0 x 0</p>
+          <input class="menu-element" type="range" value="15" min="1" max="64">
         </div>
         <div id="h1-and-sketch-container">
           <h1>Etch a sketch</h1>
