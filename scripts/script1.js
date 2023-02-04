@@ -1,9 +1,32 @@
+//global variables
+let colorElement = document.getElementById("selected-color");
+let colorNow = "#333333";
+colorElement.addEventListener("change", changeColor)
+
+//color setup function for setting the current color colorNow:
+//changeColor changes colorNow, the current color that's selected
+function changeColor() {
+    console.log("se executa changeColor");
+    console.log("value change: " + colorElement.value);
+    colorNow = colorElement.value;
+    console.log(colorNow);
+}
+
+//on click function to change square color:
+function changeSquareColor() {
+    console.log("se executa changeSquareColor");
+    console.log("color now: " + colorNow);
+    console.log(this);
+    this.style["background-color"] = colorNow;
+}
+
+//sketch setup to set size:
 let sketchSize = 15;
 let sketchSquareSize = Math.floor(500 / sketchSize);
 console.log(sketchSquareSize);
 let sketchContainer = document.getElementById("sketch-container");
 
-//setting grid style:
+//setting up the grid styles:
 let gridTemplateColumns = "";
 let gridTemplateRows = "";
 for (let i = 1; i<= sketchSize; i++) {
@@ -15,16 +38,14 @@ sketchContainer.style["grid-gap"] = "0px";
 sketchContainer.style["grid-template-columns"] = gridTemplateColumns;
 sketchContainer.style["grid-template-rows"] = gridTemplateRows;
 
+//generating the squares inside the grid
 for (let i = 1; i <= sketchSize; i++) {
     for (let j = 1; j <= sketchSize; j++) {
-    //sketchContainer.appendChild("div");
-        //console.log(sketchContainer);
         let sketchSquare = document.createElement("div");
         sketchSquare.className = "sketch-square";
         sketchContainer.appendChild(sketchSquare);
+        //console.log(sketchSquare);
+        sketchSquare.addEventListener("click", changeSquareColor)
     }
 }
-
-
-
 

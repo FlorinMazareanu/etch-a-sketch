@@ -79,3 +79,6 @@ input::-webkit-color-swatch {
     background-color: white;
     border: 1px solid black;
 }
+.sketch-square:click {
+    background-color: blueviolet;
+}
