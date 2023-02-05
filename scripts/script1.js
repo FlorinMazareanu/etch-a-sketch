@@ -37,7 +37,13 @@ function setMode(e) {
 //this function clears the sketch:
 function clearSketch(e) {
     console.log("se executa clearSketch");
-    
+    //sketchContainer.style["display"] = "grid";
+    console.log(sketchContainer.children[0]);
+    for (let i = 0; i < sketchSize*sketchSize; i++) {
+        console.log(i);
+        console.log(sketchContainer.children[i])
+        sketchContainer.children[i].style["background-color"] = "white";
+    }  
 }
 
 //event listeners on buttons to setMode:
