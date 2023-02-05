@@ -3,6 +3,7 @@ let colorElement = document.getElementById("selected-color");
 //colorNow is only used for "color mode"
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
+let mouseState;
 
 //sketch setup to set size:
 let sketchSize = 15;
@@ -53,6 +54,21 @@ function generateSketch(e) {
     sketchContainer.style["grid-template-columns"] = gridTemplateColumns;
     sketchContainer.style["grid-template-rows"] = gridTemplateRows;
 
+    //event listener for mouse down on sketchContainer:
+//this is needed for changeSquareColor to 
+//not have colors changing when hovering
+//without keeping the mouse clicked while doing so
+
+function mouseDownToggle(e) {
+    mouseState = e.type;
+    console.log(mouseState);
+}
+function mouseUpToggle(e) {
+    mouseState = e.type;
+    console.log(mouseState);
+}
+sketchContainer.addEventListener("mousedown", mouseDownToggle);
+sketchContainer.addEventListener("mouseup", mouseUpToggle);
 
 }
 
@@ -140,19 +156,4 @@ function changeSquareColor(e) {
     }
 
 }
-
-//event listener for mouse down on sketchContainer:
-//this is needed for changeSquareColor to 
-//not have colors changing when hovering
-//without keeping the mouse clicked while doing so
-let mouseState;
-function mouseDownToggle(e) {
-    mouseState = e.type;
-}
-function mouseUpToggle(e) {
-    mouseState = e.type;
-}
-sketchContainer.addEventListener("mousedown", mouseDownToggle);
-sketchContainer.addEventListener("mouseup", mouseUpToggle);
-
 
