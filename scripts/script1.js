@@ -7,10 +7,7 @@ colorElement.addEventListener("change", changeColor)
 //color setup function for setting the current color colorNow:
 //changeColor changes colorNow, the current color that's selected
 function changeColor() {
-    console.log("se executa changeColor");
-    console.log("value change: " + colorElement.value);
     colorNow = colorElement.value;
-    console.log(colorNow);
 }
 
 //event listener for mouse down:
@@ -31,28 +28,18 @@ window.addEventListener("mouseup", mouseUpToggle);
 
 //on click function to change square color:
 function changeSquareColor(e) {
-    console.log("se executa changeSquareColor");
-    console.log("color now: " + colorNow);
-    console.log(this);
-    //console.log("mouse este acum: ") + mouseDown;
-    //console.log(e.type);
-    //e.type = "mouseover";
-    //console.log(e.type);
     if (e.type === "mousemove" && mouseState === "mousedown") {
         this.style["background-color"] = colorNow;
-        console.log("mousemove");
     }
     if (e.type === "mousedown") {
-        console.log("mousedown");
         this.style["background-color"] = colorNow;
     }
-    //this.style["background-color"] = colorNow;
 }
 
 //sketch setup to set size:
 let sketchSize = 15;
 let sketchSquareSize = Math.floor(500 / sketchSize);
-console.log(sketchSquareSize);
+//console.log(sketchSquareSize);
 let sketchContainer = document.getElementById("sketch-container");
 
 //setting up the grid styles:
@@ -73,7 +60,6 @@ for (let i = 1; i <= sketchSize; i++) {
         let sketchSquare = document.createElement("div");
         sketchSquare.className = "sketch-square";
         sketchContainer.appendChild(sketchSquare);
-        //console.log(sketchSquare);
         sketchSquare.addEventListener("mousedown", changeSquareColor);
         sketchSquare.addEventListener("mousemove", changeSquareColor);
     }
