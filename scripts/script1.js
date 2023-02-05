@@ -19,8 +19,8 @@ sketchSlider.addEventListener("change", generateSketch);
 
 //function to generate and style the sketch
 function generateSketch(e) {
-    console.log("se executa generateSketch");
-    console.log(e.target.value);
+    //console.log("se executa generateSketch");
+    //console.log(e.target.value);
     sketchSize = e.target.value;
 
     //removing the current sketch to not generate duplicates:
@@ -43,6 +43,7 @@ function generateSketch(e) {
     //setting up the grid styles:
     let gridTemplateColumns = "";
     let gridTemplateRows = "";
+    sketchSquareSize = Math.floor(500 / sketchSize);
     for (let i = 1; i<= sketchSize; i++) {
         gridTemplateColumns = gridTemplateColumns + " " + sketchSquareSize + "px";
         gridTemplateRows = gridTemplateRows + " " + sketchSquareSize + "px"
