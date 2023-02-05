@@ -8,8 +8,52 @@ colorElement.addEventListener("change", changeColor)
 let sketchSize = 15;
 let sketchSquareSize = Math.floor(500 / sketchSize);
 //console.log(sketchSquareSize);
+let hAndSketchContainer = document.getElementById("h1-and-sketch-container");
 let sketchContainer = document.getElementById("sketch-container");
 let colorMode = "color";
+
+//sketch size slider:
+let sketchSlider = document.getElementById("slider");
+console.log(sketchSlider);
+sketchSlider.addEventListener("change", generateSketch);
+
+//function to generate and style the sketch
+function generateSketch(e) {
+    console.log("se executa generateSketch");
+    console.log(e.target.value);
+    sketchSize = e.target.value;
+
+    //removing the current sketch to not generate duplicates:
+    sketchContainer.remove();
+
+    //generating the new sketch container and sketch squares:
+    sketchContainer = document.createElement("div");
+    sketchContainer.id = "sketch-container";
+    hAndSketchContainer.appendChild(sketchContainer);
+    for (let i = 1; i <= sketchSize; i++) {
+        for (let j = 1; j <= sketchSize; j++) {
+            let sketchSquare = document.createElement("div");
+            sketchSquare.className = "sketch-square";
+            sketchContainer.appendChild(sketchSquare);
+            sketchSquare.addEventListener("mousedown", changeSquareColor);
+            sketchSquare.addEventListener("mousemove", changeSquareColor);
+        }
+    }
+
+    //setting up the grid styles:
+    let gridTemplateColumns = "";
+    let gridTemplateRows = "";
+    for (let i = 1; i<= sketchSize; i++) {
+        gridTemplateColumns = gridTemplateColumns + " " + sketchSquareSize + "px";
+        gridTemplateRows = gridTemplateRows + " " + sketchSquareSize + "px"
+    }
+    sketchContainer.style["display"] = "grid";
+    sketchContainer.style["grid-gap"] = "0px";
+    sketchContainer.style["grid-template-columns"] = gridTemplateColumns;
+    sketchContainer.style["grid-template-rows"] = gridTemplateRows;
+
+
+}
 
 //color setup function for setting the current color colorNow:
 //changeColor changes colorNow, the current color that's selected
@@ -34,14 +78,9 @@ function setMode(e) {
     }
 }
 
-//this function clears the sketch:
+//this function clears the sketch colors:
 function clearSketch(e) {
-    console.log("se executa clearSketch");
-    //sketchContainer.style["display"] = "grid";
-    console.log(sketchContainer.children[0]);
     for (let i = 0; i < sketchSize*sketchSize; i++) {
-        console.log(i);
-        console.log(sketchContainer.children[i])
         sketchContainer.children[i].style["background-color"] = "white";
     }  
 }
@@ -115,26 +154,4 @@ function mouseUpToggle(e) {
 sketchContainer.addEventListener("mousedown", mouseDownToggle);
 sketchContainer.addEventListener("mouseup", mouseUpToggle);
 
-//setting up the grid styles:
-let gridTemplateColumns = "";
-let gridTemplateRows = "";
-for (let i = 1; i<= sketchSize; i++) {
-    gridTemplateColumns = gridTemplateColumns + " " + sketchSquareSize + "px";
-    gridTemplateRows = gridTemplateRows + " " + sketchSquareSize + "px"
-}
-sketchContainer.style["display"] = "grid";
-sketchContainer.style["grid-gap"] = "0px";
-sketchContainer.style["grid-template-columns"] = gridTemplateColumns;
-sketchContainer.style["grid-template-rows"] = gridTemplateRows;
-
-//generating the squares inside the grid
-for (let i = 1; i <= sketchSize; i++) {
-    for (let j = 1; j <= sketchSize; j++) {
-        let sketchSquare = document.createElement("div");
-        sketchSquare.className = "sketch-square";
-        sketchContainer.appendChild(sketchSquare);
-        sketchSquare.addEventListener("mousedown", changeSquareColor);
-        sketchSquare.addEventListener("mousemove", changeSquareColor);
-    }
-}
 
