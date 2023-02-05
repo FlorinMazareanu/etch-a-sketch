@@ -18,6 +18,18 @@ let sketchSlider = document.getElementById("slider");
 console.log(sketchSlider);
 sketchSlider.addEventListener("change", generateSketch);
 
+//event listeners on buttons to setMode:
+
+let colorModeButton = document.getElementById("color-mode-button");
+let rainbowModeButton = document.getElementById("rainbow-mode-button");
+let eraserModeButton = document.getElementById("eraser-mode-button");
+let clearButton = document.getElementById("clear-button");
+
+colorModeButton.addEventListener("click", setMode);
+rainbowModeButton.addEventListener("click", setMode);
+eraserModeButton.addEventListener("click", setMode);
+clearButton.addEventListener("click", clearSketch);
+
 //function to generate and style the sketch
 function generateSketch(e) {
     //console.log("se executa generateSketch");
@@ -102,18 +114,8 @@ function clearSketch(e) {
     }  
 }
 
-//event listeners on buttons to setMode:
-let colorModeButton = document.getElementById("color-mode-button");
-let rainbowModeButton = document.getElementById("rainbow-mode-button");
-let eraserModeButton = document.getElementById("eraser-mode-button");
-let clearButton = document.getElementById("clear-button");
-
-colorModeButton.addEventListener("click", setMode);
-rainbowModeButton.addEventListener("click", setMode);
-eraserModeButton.addEventListener("click", setMode);
-clearButton.addEventListener("click", clearSketch);
-
 //function for random colors randomColorGenerator
+
 let randomColor = "";
 function randomColorGenerator() {
     let red = Math.floor(Math.random() * 255).toString();
@@ -124,6 +126,7 @@ function randomColorGenerator() {
 
 //on click function to change square color:
 //this function will do different things, depending on the mode
+
 function changeSquareColor(e) {
     switch (colorMode) {
         case "color":
@@ -154,6 +157,5 @@ function changeSquareColor(e) {
         default:
             console.log("default");
     }
-
 }
 
