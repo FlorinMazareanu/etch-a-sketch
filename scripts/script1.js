@@ -1,19 +1,26 @@
 //global variables
+
 let colorElement = document.getElementById("selected-color");
+
 //colorNow is only used for "color mode"
+
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
 let mouseState;
 
 //sketch setup to set size:
+
 let sketchSize = 15;
 let sketchSquareSize = Math.floor(500 / sketchSize);
+
 //console.log(sketchSquareSize);
+
 let hAndSketchContainer = document.getElementById("h1-and-sketch-container");
 let sketchContainer = document.getElementById("sketch-container");
 let colorMode = "color";
 
 //sketch size slider:
+
 let sketchSlider = document.getElementById("slider");
 console.log(sketchSlider);
 sketchSlider.addEventListener("change", generateSketch);
@@ -31,15 +38,16 @@ eraserModeButton.addEventListener("click", setMode);
 clearButton.addEventListener("click", clearSketch);
 
 //function to generate and style the sketch
+
 function generateSketch(e) {
-    //console.log("se executa generateSketch");
-    //console.log(e.target.value);
     sketchSize = e.target.value;
 
     //removing the current sketch to not generate duplicates:
+
     sketchContainer.remove();
 
     //generating the new sketch container and sketch squares:
+
     sketchContainer = document.createElement("div");
     sketchContainer.id = "sketch-container";
     hAndSketchContainer.appendChild(sketchContainer);
@@ -54,6 +62,7 @@ function generateSketch(e) {
     }
 
     //setting up the grid styles:
+
     let gridTemplateColumns = "";
     let gridTemplateRows = "";
     sketchSquareSize = Math.floor(500 / sketchSize);
@@ -67,21 +76,20 @@ function generateSketch(e) {
     sketchContainer.style["grid-template-rows"] = gridTemplateRows;
 
     //event listener for mouse down on sketchContainer:
-//this is needed for changeSquareColor to 
-//not have colors changing when hovering
-//without keeping the mouse clicked while doing so
+    //this is needed for changeSquareColor to 
+    //not have colors changing when hovering
+    //without keeping the mouse clicked while doing so
 
-function mouseDownToggle(e) {
-    mouseState = e.type;
-    console.log(mouseState);
-}
-function mouseUpToggle(e) {
-    mouseState = e.type;
-    console.log(mouseState);
-}
-sketchContainer.addEventListener("mousedown", mouseDownToggle);
-sketchContainer.addEventListener("mouseup", mouseUpToggle);
-
+    function mouseDownToggle(e) {
+        mouseState = e.type;
+        console.log(mouseState);
+    }
+    function mouseUpToggle(e) {
+        mouseState = e.type;
+        console.log(mouseState);
+    }
+    sketchContainer.addEventListener("mousedown", mouseDownToggle);
+    sketchContainer.addEventListener("mouseup", mouseUpToggle);
 }
 
 //color setup function for setting the current color colorNow:
