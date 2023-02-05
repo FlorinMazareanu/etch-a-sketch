@@ -1,5 +1,6 @@
 //global variables
 let colorElement = document.getElementById("selected-color");
+//colorNow is only used for "color mode"
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
 
@@ -16,9 +17,8 @@ function changeColor() {
     colorNow = colorElement.value;
 }
 
-//setMode function to set cologing mode:
+//setMode function to set coloring mode:
 function setMode(e) {
-    console.log(e.target.id);
     switch (e.target.id) {
         case "color-mode-button":
             colorMode = "color";
@@ -32,26 +32,67 @@ function setMode(e) {
         default:
             console.log("default");
     }
-    console.log(colorMode);
+}
+
+//this function clears the sketch:
+function clearSketch(e) {
+    console.log("se executa clearSketch");
+    
 }
 
 //event listeners on buttons to setMode:
 let colorModeButton = document.getElementById("color-mode-button");
 let rainbowModeButton = document.getElementById("rainbow-mode-button");
 let eraserModeButton = document.getElementById("eraser-mode-button");
+let clearButton = document.getElementById("clear-button");
 
 colorModeButton.addEventListener("click", setMode);
 rainbowModeButton.addEventListener("click", setMode);
 eraserModeButton.addEventListener("click", setMode);
+clearButton.addEventListener("click", clearSketch);
+
+//function for random colors randomColorGenerator
+let randomColor = "";
+function randomColorGenerator() {
+    let red = Math.floor(Math.random() * 255).toString();
+    let green = Math.floor(Math.random() * 255).toString();
+    let blue = Math.floor(Math.random() * 255).toString();
+    randomColor = "rgb(" + red + ", " + green + ", " + blue + ")";   
+}
 
 //on click function to change square color:
+//this function will do different things, depending on the mode
 function changeSquareColor(e) {
-    if (e.type === "mousemove" && mouseState === "mousedown") {
-        this.style["background-color"] = colorNow;
+    switch (colorMode) {
+        case "color":
+            if (e.type === "mousemove" && mouseState === "mousedown") {
+                this.style["background-color"] = colorNow;
+            }
+            if (e.type === "mousedown") {
+                this.style["background-color"] = colorNow;
+            }
+            break;
+        case "rainbow":
+            randomColorGenerator();
+            if (e.type === "mousemove" && mouseState === "mousedown") {
+                this.style["background-color"] = randomColor;
+            }
+            if (e.type === "mousedown") {
+                this.style["background-color"] = randomColor;
+            }
+            break;
+        case "eraser":
+            if (e.type === "mousemove" && mouseState === "mousedown") {
+                this.style["background-color"] = "white";
+            }
+            if (e.type === "mousedown") {
+                this.style["background-color"] = "white";
+            }
+            break;
+        default:
+            console.log("default");
     }
-    if (e.type === "mousedown") {
-        this.style["background-color"] = colorNow;
-    }
+
 }
 
 //event listener for mouse down on sketchContainer:
@@ -61,11 +102,9 @@ function changeSquareColor(e) {
 let mouseState;
 function mouseDownToggle(e) {
     mouseState = e.type;
-    console.log(mouseState);
 }
 function mouseUpToggle(e) {
     mouseState = e.type;
-    console.log(mouseState);
 }
 sketchContainer.addEventListener("mousedown", mouseDownToggle);
 sketchContainer.addEventListener("mouseup", mouseUpToggle);
