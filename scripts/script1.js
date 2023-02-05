@@ -1,8 +1,8 @@
-//global variables
+//variable for the color picker:
 
 let colorElement = document.getElementById("selected-color");
 
-//colorNow is only used for "color mode"
+//colorNow is only used for "color mode", not for "rainbow or eraser"
 
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
@@ -13,19 +13,20 @@ let mouseState;
 let sketchSize = 15;
 let sketchSquareSize = Math.floor(500 / sketchSize);
 
-//console.log(sketchSquareSize);
-
 let hAndSketchContainer = document.getElementById("h1-and-sketch-container");
 let sketchContainer = document.getElementById("sketch-container");
 let colorMode = "color";
 
-//sketch size slider:
+//sketch size slider and event listener that triggers generateSketch():
 
 let sketchSlider = document.getElementById("slider");
-console.log(sketchSlider);
 sketchSlider.addEventListener("change", generateSketch);
 
-//event listeners on buttons to setMode:
+//var element = document.getElementById('just_an_example');
+let event = new Event('change');
+sketchSlider.dispatchEvent(event);
+
+//event listeners on buttons to setMode - color - rainbow - eraser:
 
 let colorModeButton = document.getElementById("color-mode-button");
 let rainbowModeButton = document.getElementById("rainbow-mode-button");
@@ -38,14 +39,15 @@ eraserModeButton.addEventListener("click", setMode);
 clearButton.addEventListener("click", clearSketch);
 
 //function to generate and style the sketch
+//this one executes on page load and on slider changes
 
 function generateSketch(e) {
-    sketchSize = e.target.value;
 
+    sketchSize = e.target.value;
     //removing the current sketch to not generate duplicates:
 
     sketchContainer.remove();
-
+    
     //generating the new sketch container and sketch squares:
 
     sketchContainer = document.createElement("div");
@@ -82,11 +84,9 @@ function generateSketch(e) {
 
     function mouseDownToggle(e) {
         mouseState = e.type;
-        console.log(mouseState);
     }
     function mouseUpToggle(e) {
         mouseState = e.type;
-        console.log(mouseState);
     }
     sketchContainer.addEventListener("mousedown", mouseDownToggle);
     sketchContainer.addEventListener("mouseup", mouseUpToggle);
@@ -103,6 +103,7 @@ function setMode(e) {
     switch (e.target.id) {
         case "color-mode-button":
             colorMode = "color";
+            console.log(this);
             break;
         case "rainbow-mode-button":
             colorMode = "rainbow";
