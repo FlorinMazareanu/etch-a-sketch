@@ -6,7 +6,7 @@ let colorElement = document.getElementById("selected-color");
 
 let colorNow = "#333333";
 colorElement.addEventListener("change", changeColor)
-let mouseState;
+let pointerState;
 
 //sketch setup to set size:
 
@@ -58,8 +58,8 @@ function generateSketch(e) {
             let sketchSquare = document.createElement("div");
             sketchSquare.className = "sketch-square";
             sketchContainer.appendChild(sketchSquare);
-            sketchSquare.addEventListener("mousedown", changeSquareColor);
-            sketchSquare.addEventListener("mousemove", changeSquareColor);
+            sketchSquare.addEventListener("pointerdown", changeSquareColor);
+            sketchSquare.addEventListener("pointermove", changeSquareColor);
         }
     }
 
@@ -77,19 +77,19 @@ function generateSketch(e) {
     sketchContainer.style["grid-template-columns"] = gridTemplateColumns;
     sketchContainer.style["grid-template-rows"] = gridTemplateRows;
 
-    //event listener for mouse down on sketchContainer:
+    //event listener for pointer down on sketchContainer:
     //this is needed for changeSquareColor to 
     //not have colors changing when hovering
-    //without keeping the mouse clicked while doing so
+    //without keeping the pointer clicked while doing so
 
-    function mouseDownToggle(e) {
-        mouseState = e.type;
+    function pointerDownToggle(e) {
+        pointerState = e.type;
     }
-    function mouseUpToggle(e) {
-        mouseState = e.type;
+    function pointerUpToggle(e) {
+        pointerState = e.type;
     }
-    sketchContainer.addEventListener("mousedown", mouseDownToggle);
-    sketchContainer.addEventListener("mouseup", mouseUpToggle);
+    sketchContainer.addEventListener("pointerdown", pointerDownToggle);
+    sketchContainer.addEventListener("pointerup", pointerUpToggle);
 }
 
 //color setup function for setting the current color colorNow:
@@ -139,27 +139,27 @@ function randomColorGenerator() {
 function changeSquareColor(e) {
     switch (colorMode) {
         case "color":
-            if (e.type === "mousemove" && mouseState === "mousedown") {
+            if (e.type === "pointermove" && pointerState === "pointerdown") {
                 this.style["background-color"] = colorNow;
             }
-            if (e.type === "mousedown") {
+            if (e.type === "pointerdown") {
                 this.style["background-color"] = colorNow;
             }
             break;
         case "rainbow":
             randomColorGenerator();
-            if (e.type === "mousemove" && mouseState === "mousedown") {
+            if (e.type === "pointermove" && pointerState === "pointerdown") {
                 this.style["background-color"] = randomColor;
             }
-            if (e.type === "mousedown") {
+            if (e.type === "pointerdown") {
                 this.style["background-color"] = randomColor;
             }
             break;
         case "eraser":
-            if (e.type === "mousemove" && mouseState === "mousedown") {
+            if (e.type === "pointermove" && pointerState === "pointerdown") {
                 this.style["background-color"] = "white";
             }
-            if (e.type === "mousedown") {
+            if (e.type === "pointerdown") {
                 this.style["background-color"] = "white";
             }
             break;
