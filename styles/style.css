@@ -1,10 +1,14 @@
-body {
+html, body {
     margin: 0px;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+body {
+    position: relative;
 }
 
 input::-webkit-color-swatch {
@@ -88,3 +92,7 @@ input::-webkit-color-swatch {
 .sketch-square:click {
     background-color: blueviolet;
 }
+
+@media (min-width: 1000px) and (max-width: 1800px) {
+
+  }
